@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="11dp"
         android:paddingTop="11dp"
-        android:hint="@string/enter_first_side"
+        android:hint="@+string/enter_first_side"
         android:inputType="numberDecimal" />
 
     <EditText
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="11dp"
         android:paddingTop="11dp"
-        android:hint="@string/enter_second_side"
+        android:hint="@+string/enter_second_side"
         android:inputType="numberDecimal" />
 
     <EditText
@@ -35,6 +35,24 @@
         android:layout_height="wrap_content"
         android:paddingBottom="11dp"
         android:paddingTop="11dp"
-        android:hint="@string/enter_third_side"
+        android:hint="@+string/enter_third_side"
         android:inputType="numberDecimal" />
+    
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="11dp"
+        android:paddingTop="11dp"
+        android:hint="@+string/submit"
+        android:onClick="getTriangle"/>
+    
+    <TextView
+        android:id="@+id/error_box"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="11dp"
+        android:paddingTop="11dp"
+        android:visibility="gone"/>
+    
 </LinearLayout>

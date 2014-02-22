@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Main activity -->
     <string name="app_name">amt</string>
     <string name="enter_first_side">Enter the first side</string>
     <string name="enter_second_side">Enter the second side</string>
     <string name="enter_third_side">Enter the third side</string>
     <string name="submit">Get triangle!</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- Error messages -->
+    <string name="error_empty_input">Error: You must enter a value for each side</string>
 
 
 </resources>
