@@ -159,6 +159,71 @@ public class AmtTest extends ActivityInstrumentationTestCase2<MainActivity>{
     	assertEquals(expectedMessage, message);
     }
     
+    @Test
+    public void testIsIsosceles() {
+    	EditText firstInput = (EditText)mainActivity.findViewById(R.id.first_side);
+    	EditText secondInput = (EditText)mainActivity.findViewById(R.id.second_side);
+    	EditText thirdInput = (EditText)mainActivity.findViewById(R.id.third_side);
+    	
+    	setViewText(firstInput, "60");
+    	setViewText(secondInput, "60");
+    	setViewText(thirdInput, "80");
+
+    	clickSubmit();
+    	
+    	String expectedMessage = "Isosceles triangle";
+    	String message;
+    	
+    	TextView outputBox = (TextView)mainActivity.findViewById(R.id.error_box);
+    	message = outputBox.getText().toString();
+    	
+    	assertEquals(expectedMessage, message);
+    	
+    }
+    
+    @Test
+    public void testIsEquilateral() {
+    	EditText firstInput = (EditText)mainActivity.findViewById(R.id.first_side);
+    	EditText secondInput = (EditText)mainActivity.findViewById(R.id.second_side);
+    	EditText thirdInput = (EditText)mainActivity.findViewById(R.id.third_side);
+    	
+    	setViewText(firstInput, "60");
+    	setViewText(secondInput, "60");
+    	setViewText(thirdInput, "60");
+
+    	clickSubmit();
+    	
+    	String expectedMessage = "Equilateral triangle";
+    	String message;
+    	
+    	TextView outputBox = (TextView)mainActivity.findViewById(R.id.error_box);
+    	message = outputBox.getText().toString();
+    	
+    	assertEquals(expectedMessage, message);
+    	
+    }
+    
+    @Test
+    public void testIsScalene() {
+    	EditText firstInput = (EditText)mainActivity.findViewById(R.id.first_side);
+    	EditText secondInput = (EditText)mainActivity.findViewById(R.id.second_side);
+    	EditText thirdInput = (EditText)mainActivity.findViewById(R.id.third_side);
+    	
+    	setViewText(firstInput, "30");
+    	setViewText(secondInput, "40");
+    	setViewText(thirdInput, "50");
+
+    	clickSubmit();
+    	
+    	String expectedMessage = "Scalene triangle";
+    	String message;
+    	
+    	TextView outputBox = (TextView)mainActivity.findViewById(R.id.error_box);
+    	message = outputBox.getText().toString();
+    	
+    	assertEquals(expectedMessage, message);
+    }
+    
     /**
      * Helper methods
      */
@@ -213,9 +278,4 @@ public class AmtTest extends ActivityInstrumentationTestCase2<MainActivity>{
 				
 		}
     }
-    
-    
-    /**TODO:
-     * Add test for error box disappearing after correct input
-     */
 }
