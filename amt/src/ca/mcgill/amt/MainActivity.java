@@ -31,23 +31,34 @@ public class MainActivity extends Activity {
 	 * triangle the user has input
 	 */
 	public void getTriangle(View v){
-	
+					
+		TextView errorBox = (TextView)findViewById(R.id.error_box);
+		
 		//Obtain user input
 		firstInput = (EditText)findViewById(R.id.first_side);
 		secondInput = (EditText)findViewById(R.id.second_side);
 		thirdInput = (EditText)findViewById(R.id.third_side);
 
+		double firstSide, secondSide, thirdSide;
+		
 		//Check if any of the inputs are empty
 		if(firstInput.getText().toString().equals("") 		||
 				secondInput.getText().toString().equals("")	||
 				thirdInput.getText().toString().equals("")	){
 			
 			//Displays an error message if any inputs are empty
-			errorBox = (TextView)findViewById(R.id.error_box);
 			errorBox.setText("Error: You must enter a value for each side");
 			errorBox.setVisibility(View.VISIBLE);
 		}
-		
-	}
 
+		//Check if the inputs are the right type
+		else if(!firstInput.getText().toString().matches("[0-9]\\.[0-9]+|([0-9]+)")  ||
+				!secondInput.getText().toString().matches("[0-9]\\.[0-9]+|([0-9]+)") ||
+				!thirdInput.getText().toString().matches("[0-9]\\.[0-9]+|([0-9]+)") ){
+
+			//Displays an error message if any inputs are not numbers
+			errorBox.setText("Error: You may only enter positive numbers");
+			errorBox.setVisibility(View.VISIBLE);
+		}		
+	}
 }

@@ -75,39 +75,101 @@ public class AmtTest extends ActivityInstrumentationTestCase2<MainActivity>{
     
     @Test
     public void testNoInputsFilled(){
-    	int numChildren = layout.getChildCount();
-    	
-    	//Search for the button in the activity
-    	for(int i = 0; i < numChildren; i++){
-    		
-    		final View child = layout.getChildAt(i);
-    		
-    		//Click the button
-    		if(child instanceof Button){
-    			
-    			//Run button click on new thread
-    			try{
-    				runTestOnUiThread(new Runnable() {
-    					@Override
-    					public void run(){
-    						//Press the submit button
-    						Button button = (Button)child;
-    						button.performClick();
-    					}
-    				});
-    			} catch(Throwable e){
-    				
-    			}
-    		}
-    	}
+    	clickSubmit();	
     	
     	//Check if the error message appears
     	String expectedMessage = "Error: You must enter a value for each side";
     	String message = "";
 
-    	TextView errorBox = (TextView)layout.getChildAt(4);
+    	TextView errorBox = (TextView)mainActivity.findViewById(R.id.error_box);
     	message = errorBox.getText().toString();
     	   	
     	assertEquals(expectedMessage, message);
     }
+    
+    
+    @Test
+    public void testInputType(){
+    	
+    	//Set the input fields to invalid inputs
+    	EditText firstInput = (EditText)mainActivity.findViewById(R.id.first_side);
+    	EditText secondInput = (EditText)mainActivity.findViewById(R.id.second_side);
+    	EditText thirdInput = (EditText)mainActivity.findViewById(R.id.third_side);
+    	
+    	setViewText(firstInput, "a");
+    	setViewText(secondInput, "b");
+    	setViewText(thirdInput, "]");
+
+    	clickSubmit();
+
+    	//Check if the error message appears
+    	String expectedMessage = "Error: You may only enter positive numbers";
+    	String message = "";
+    	
+    	TextView errorBox = (TextView)mainActivity.findViewById(R.id.error_box);
+    	message = errorBox.getText().toString();
+    	   	
+    	assertEquals(expectedMessage, message);
+    }
+    
+    
+    /**
+     * Helper methods
+     */
+    
+    
+    //Clicks the submit button on the main activity
+    public void clickSubmit(){
+    	final View child = layout.getChildAt(3);
+		
+		//Run button click on new thread
+		try{
+			runTestOnUiThread(new Runnable() {
+				@Override
+				public void run(){
+					//Press the submit button
+					Button button = (Button)child;
+					button.performClick();
+				}
+			});
+		} catch(Throwable e){
+				
+		}	
+    }
+    
+    //Changes the text in an EditText view
+    public void setViewText(final EditText textField, final String text){
+		
+		//Change text in new thread
+		try{
+			runTestOnUiThread(new Runnable() {
+				@Override
+				public void run(){
+					textField.setText(text);
+				}
+			});
+		} catch(Throwable e){
+				
+		}
+    }
+    
+    public void setViewText(final EditText textField, final int text){
+		
+		//Change text in new thread
+		try{
+			runTestOnUiThread(new Runnable() {
+				@Override
+				public void run(){
+					textField.setText(text);
+				}
+			});
+		} catch(Throwable e){
+				
+		}
+    }
+    
+    
+    /**TODO:
+     * Add test for error box disappearing after correct input
+     */
 }
