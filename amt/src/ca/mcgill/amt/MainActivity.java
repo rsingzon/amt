@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 		secondInput = (EditText)findViewById(R.id.second_side);
 		thirdInput = (EditText)findViewById(R.id.third_side);
 
-		double firstSide, secondSide, thirdSide;
+		int firstSide, secondSide, thirdSide;
 		
 		//Check if any of the inputs are empty
 		if(firstInput.getText().toString().equals("") 		||
@@ -52,13 +52,38 @@ public class MainActivity extends Activity {
 		}
 
 		//Check if the inputs are the right type
-		else if(!firstInput.getText().toString().matches("[0-9]\\.[0-9]+|([0-9]+)")  ||
-				!secondInput.getText().toString().matches("[0-9]\\.[0-9]+|([0-9]+)") ||
-				!thirdInput.getText().toString().matches("[0-9]\\.[0-9]+|([0-9]+)") ){
+		else if(!firstInput.getText().toString().matches("[0-9]+")  ||
+				!secondInput.getText().toString().matches("[0-9]+") ||
+				!thirdInput.getText().toString().matches("[0-9]+") ){
 
 			//Displays an error message if any inputs are not numbers
 			errorBox.setText("Error: You may only enter positive numbers");
 			errorBox.setVisibility(View.VISIBLE);
-		}		
+		}
+		
+		firstSide = Integer.parseInt(firstInput.getText().toString());
+		secondSide = Integer.parseInt(secondInput.getText().toString());
+		thirdSide = Integer.parseInt(thirdInput.getText().toString());
+		
+		//Check if the inputs are within the valid range
+		if(firstSide   < 1 || firstSide  > 100 ||
+			secondSide < 1 || secondSide > 100 ||
+			thirdSide  < 1 || secondSide > 100 ){
+			
+			//Displays an error message if any number is out of bounds
+			errorBox.setText("Error: You must enter numbers between 1 and 100 inclusive");
+			errorBox.setVisibility(View.VISIBLE);
+		}
+		
+		//Check if the inputs actually create a triangle
+		else if((firstSide + secondSide) < thirdSide  ||
+				(firstSide + thirdSide ) < secondSide ||
+				(secondSide + thirdSide) < firstSide ){
+			
+			//Displays an error message
+			errorBox.setText("Error: The lengths entered do not create a triangle");
+			errorBox.setVisibility(View.VISIBLE);
+		}
+		
 	}
 }

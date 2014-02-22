@@ -112,6 +112,52 @@ public class AmtTest extends ActivityInstrumentationTestCase2<MainActivity>{
     	assertEquals(expectedMessage, message);
     }
     
+    @Test
+    public void testInputBounds(){
+    	
+    	//Set the input fields to values outside of 1 - 100 range
+    	EditText firstInput = (EditText)mainActivity.findViewById(R.id.first_side);
+    	EditText secondInput = (EditText)mainActivity.findViewById(R.id.second_side);
+    	EditText thirdInput = (EditText)mainActivity.findViewById(R.id.third_side);
+    	
+    	setViewText(firstInput, "0");
+    	setViewText(secondInput, "101");
+    	setViewText(thirdInput, "100");
+
+    	clickSubmit();
+    	
+    	//Check if the error message appears
+    	String expectedMessage = "Error: You must enter numbers between 1 and 100 inclusive";
+    	String message = "";
+    	
+    	TextView errorBox = (TextView)mainActivity.findViewById(R.id.error_box);
+    	message = errorBox.getText().toString();
+    	   	
+    	assertEquals(expectedMessage, message);
+    }
+    
+    @Test
+    public void testIsTriangle(){
+    	//Set two inputs such that their sum is smaller than third input
+    	EditText firstInput = (EditText)mainActivity.findViewById(R.id.first_side);
+    	EditText secondInput = (EditText)mainActivity.findViewById(R.id.second_side);
+    	EditText thirdInput = (EditText)mainActivity.findViewById(R.id.third_side);
+    	
+    	setViewText(firstInput, "1");
+    	setViewText(secondInput, "1");
+    	setViewText(thirdInput, "100");
+
+    	clickSubmit();
+    	
+    	//Check if the error message appears
+    	String expectedMessage = "Error: The lengths entered do not create a triangle";
+    	String message = "";
+    	
+    	TextView errorBox = (TextView)mainActivity.findViewById(R.id.error_box);
+    	message = errorBox.getText().toString();
+    	   	
+    	assertEquals(expectedMessage, message);
+    }
     
     /**
      * Helper methods
